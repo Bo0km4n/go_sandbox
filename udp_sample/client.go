@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"net"
-	"strconv"
 	"time"
 )
 
@@ -26,17 +25,18 @@ func main() {
 	defer Conn.Close()
 	i := 0
 	for {
-		msg := strconv.Itoa(i)
+		msg := "Hello world"
 		i++
 		buf := []byte(msg)
 		_, err := Conn.Write(buf)
 		if err != nil {
 			fmt.Println(msg, err)
 		}
+		fmt.Println("Writed Message")
 		time.Sleep(time.Second * 1)
 
-		buf = make([]byte, 1024)
-		n, addr, err := Conn.ReadFrom(buf)
-		fmt.Println("Received ", string(buf[0:n]), " from ", addr)
+		//buf = make([]byte, 1024)
+		//n, addr, err := Conn.ReadFrom(buf)
+		//fmt.Println("Received ", string(buf[0:n]), " from ", addr)
 	}
 }
